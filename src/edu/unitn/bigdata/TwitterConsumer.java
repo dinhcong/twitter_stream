@@ -1,6 +1,12 @@
 package edu.unitn.bigdata;
 
-import twitter4j.RawStreamListener;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+
+import twitter4j.*;
 import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
 import twitter4j.auth.AccessToken;
@@ -15,18 +21,60 @@ public class TwitterConsumer {
         TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
         twitterStream.setOAuthConsumer("OOZKe0dvCzgS6Isxcpg98g", "HkLM90v39VhgptMCPMENUd2Sgq6rS2YpX45xS6Nro");
         twitterStream.setOAuthAccessToken(accessToken);
-        RawStreamListener listener = new RawStreamListener() {
+        StatusListener simpleStatusListener = new StatusListener() {
             @Override
-            public void onMessage(String rawJSON) {
-                System.out.println(rawJSON);
+            public void onStatus(Status status) {
+                if (status.getLang().equals("en"))
+                {
+                    System.out.println(status.getText());
+                    writeTweets(status.getText());
+                }
             }
 
             @Override
-            public void onException(Exception ex) {
-                ex.printStackTrace();
+            public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
+
+            }
+
+            @Override
+            public void onTrackLimitationNotice(int i) {
+
+            }
+
+            @Override
+            public void onScrubGeo(long l, long l2) {
+
+            }
+
+            @Override
+            public void onStallWarning(StallWarning stallWarning) {
+
+            }
+
+            @Override
+            public void onException(Exception e) {
+                System.out.println("Exception!!!");
+                e.printStackTrace();
             }
         };
-        twitterStream.addListener(listener);
+
+        twitterStream.addListener(simpleStatusListener);
         twitterStream.sample();
+    }
+
+    public static void writeTweets(String tweet) {
+        Path path = Paths.get("./data/tweets.txt");
+        try
+        {
+            OutputStream outputStream = Files.newOutputStream(path, StandardOpenOption.CREATE,
+                    StandardOpenOption.APPEND);
+
+            tweet = tweet + '\n';
+            Files.write(path, tweet.getBytes(), StandardOpenOption.APPEND);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }
