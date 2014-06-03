@@ -1,6 +1,8 @@
 package edu.unitn.bigdata;
 
-import twitter4j.*;
+import twitter4j.RawStreamListener;
+import twitter4j.TwitterStream;
+import twitter4j.TwitterStreamFactory;
 import twitter4j.auth.AccessToken;
 
 /**
