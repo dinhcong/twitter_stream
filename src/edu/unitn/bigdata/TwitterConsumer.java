@@ -8,9 +8,7 @@ import twitter4j.auth.AccessToken;
  */
 public class TwitterConsumer {
     public static void main(String args[]) throws Exception{
-        String token ="867221126-vsmwC9Gf5DNTh7zQkxxnWojhzAdrEQ0kqKSEZhI7"; // load from a persistent store
-        String tokenSecret ="FCEgFIWVIwdpKYqkQ7YRxHa1sxlT0MFDJN6hfCWQc"; // load from a persistent store
-        AccessToken accessToken = new AccessToken(token, tokenSecret);
+        AccessToken accessToken = new AccessToken("867221126-vsmwC9Gf5DNTh7zQkxxnWojhzAdrEQ0kqKSEZhI7", "FCEgFIWVIwdpKYqkQ7YRxHa1sxlT0MFDJN6hfCWQc");
 
         TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
         twitterStream.setOAuthConsumer("OOZKe0dvCzgS6Isxcpg98g", "HkLM90v39VhgptMCPMENUd2Sgq6rS2YpX45xS6Nro");
