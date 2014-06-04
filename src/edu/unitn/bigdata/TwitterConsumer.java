@@ -3,11 +3,9 @@ package edu.unitn.bigdata;
 import twitter4j.*;
 import twitter4j.auth.AccessToken;
 
-import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 
 /**
  * Created by congdinh on 6/3/14.
@@ -65,11 +63,17 @@ public class TwitterConsumer {
     }
 
     public static void writeTweets(String tweet) {
-        Path path = Paths.get(dataPath);
+        File file = new File(dataPath);
         try
         {
-            tweet = tweet + '\n';
-            Files.write(path, tweet.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fw = new FileWriter(file.getPath(), true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(tweet);
+            bw.newLine();
+            bw.close();
         }
         catch (Exception e)
         {
