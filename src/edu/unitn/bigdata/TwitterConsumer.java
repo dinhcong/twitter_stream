@@ -15,7 +15,12 @@ import twitter4j.auth.AccessToken;
  * Created by congdinh on 6/3/14.
  */
 public class TwitterConsumer {
+    static String dataPath = "tweets.txt";
+
     public static void main(String args[]) throws Exception{
+
+        if (args.length > 0) dataPath = args[0];
+
         AccessToken accessToken = new AccessToken("867221126-vsmwC9Gf5DNTh7zQkxxnWojhzAdrEQ0kqKSEZhI7", "FCEgFIWVIwdpKYqkQ7YRxHa1sxlT0MFDJN6hfCWQc");
 
         TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
@@ -26,8 +31,7 @@ public class TwitterConsumer {
             public void onStatus(Status status) {
                 if (status.getLang().equals("en"))
                 {
-                    System.out.println(status.getText());
-                    writeTweets(status.getText());
+                    writeTweets(status.getId() + "\t" + status.getUser().getScreenName() + "\t" + status.getCreatedAt().getTime() + "\t" + status.getText().replace("\n", " ").replace("  ", " "));
                 }
             }
 
@@ -63,7 +67,7 @@ public class TwitterConsumer {
     }
 
     public static void writeTweets(String tweet) {
-        Path path = Paths.get("./data/tweets.txt");
+        Path path = Paths.get(dataPath);
         try
         {
             OutputStream outputStream = Files.newOutputStream(path, StandardOpenOption.CREATE,
