@@ -1,0 +1,15 @@
+/data/*
+
+/out/*
+
+# Permission file #
+*.pem
+
+### Java ###
+*.class
+
+### IntelliJ ###
+*.iml
+*.ipr
+*.iws
+.idea/
