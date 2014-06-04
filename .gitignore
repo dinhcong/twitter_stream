@@ -1,2 +1,13 @@
 /data/*
-/config/bigdatacourse.pem
+
+# Permission file #
+*.pem
+
+### Java ###
+*.class
+
+### IntelliJ ###
+*.iml
+*.ipr
+*.iws
+.idea/
