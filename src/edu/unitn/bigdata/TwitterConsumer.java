@@ -68,11 +68,8 @@ public class TwitterConsumer {
         Path path = Paths.get(dataPath);
         try
         {
-            OutputStream outputStream = Files.newOutputStream(path, StandardOpenOption.CREATE,
-                    StandardOpenOption.APPEND);
-
             tweet = tweet + '\n';
-            Files.write(path, tweet.getBytes(), StandardOpenOption.APPEND);
+            Files.write(path, tweet.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
         }
         catch (Exception e)
         {
