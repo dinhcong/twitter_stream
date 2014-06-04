@@ -31,7 +31,7 @@ public class TwitterConsumer {
             public void onStatus(Status status) {
                 if (status.getLang().equals("en"))
                 {
-                    writeTweets(status.getId() + "\t" + status.getUser().getScreenName() + "\t" + status.getCreatedAt().toString() + "\t" + status.getText());
+                    writeTweets(status.getId() + "\t" + status.getUser().getScreenName() + "\t" + status.getCreatedAt().getTime() + "\t" + status.getText().replace("\n", " ").replace("  ", " "));
                 }
             }
 

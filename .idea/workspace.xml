@@ -6,7 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9357fb45-015f-4864-a0a8-593f62e429dc" name="Default" comment="add information to txt file, and option for argument">
+    <list default="true" id="9357fb45-015f-4864-a0a8-593f62e429dc" name="Default" comment="fix user's screen name">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/unitn/bigdata/TwitterConsumer.java" afterPath="$PROJECT_DIR$/src/edu/unitn/bigdata/TwitterConsumer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -34,8 +34,8 @@
       <file leaf-file-name="TwitterConsumer.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/edu/unitn/bigdata/TwitterConsumer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.57" vertical-offset="180" max-vertical-offset="1350">
-              <caret line="31" column="50" selection-start-line="31" selection-start-column="50" selection-end-line="31" selection-end-column="50" />
+            <state vertical-scroll-proportion="0.69" vertical-offset="180" max-vertical-offset="1350">
+              <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -500,7 +500,7 @@
       <workItem from="1401825526877" duration="4000" />
       <workItem from="1401845564366" duration="74000" />
       <workItem from="1401845689227" duration="786000" />
-      <workItem from="1401868959688" duration="1310000" />
+      <workItem from="1401868959688" duration="1687000" />
     </task>
     <task id="LOCAL-00001" summary="remove var token &amp; tokenSecret">
       <created>1401813993549</created>
@@ -526,11 +526,15 @@
       <created>1401870768692</created>
       <updated>1401870768692</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fix user's screen name">
+      <created>1401870965135</created>
+      <updated>1401870965135</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6611000" />
+    <option name="totallyTimeSpent" value="6988000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -603,7 +607,8 @@
     <MESSAGE value="modified artifacts" />
     <MESSAGE value="add manifest for packaging JAR file" />
     <MESSAGE value="add information to txt file, and option for argument" />
-    <option name="LAST_COMMIT_MESSAGE" value="add information to txt file, and option for argument" />
+    <MESSAGE value="fix user's screen name" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix user's screen name" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -680,8 +685,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/unitn/bigdata/TwitterConsumer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.57" vertical-offset="180" max-vertical-offset="1350">
-          <caret line="31" column="50" selection-start-line="31" selection-start-column="50" selection-end-line="31" selection-end-column="50" />
+        <state vertical-scroll-proportion="0.69" vertical-offset="180" max-vertical-offset="1350">
+          <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
