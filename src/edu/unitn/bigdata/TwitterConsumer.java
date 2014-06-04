@@ -18,7 +18,7 @@ public class TwitterConsumer {
     static String dataPath = "tweets.txt";
 
     public static void main(String args[]) throws Exception{
-        
+
         if (args.length > 0) dataPath = args[0];
 
         AccessToken accessToken = new AccessToken("867221126-vsmwC9Gf5DNTh7zQkxxnWojhzAdrEQ0kqKSEZhI7", "FCEgFIWVIwdpKYqkQ7YRxHa1sxlT0MFDJN6hfCWQc");
@@ -31,7 +31,7 @@ public class TwitterConsumer {
             public void onStatus(Status status) {
                 if (status.getLang().equals("en"))
                 {
-                    writeTweets(status.getId() + "\t" + status.getUser() + "\t" + status.getCreatedAt().toString() + "\t" + status.getText());
+                    writeTweets(status.getId() + "\t" + status.getUser().getScreenName() + "\t" + status.getCreatedAt().toString() + "\t" + status.getText());
                 }
             }
 
