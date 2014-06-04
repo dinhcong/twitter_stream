@@ -6,8 +6,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9357fb45-015f-4864-a0a8-593f62e429dc" name="Default" comment="fix user's screen name">
+    <list default="true" id="9357fb45-015f-4864-a0a8-593f62e429dc" name="Default" comment="fix UNIX time and remove \n &amp; double spaces in text">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/unitn/bigdata/TwitterConsumer.java" afterPath="$PROJECT_DIR$/src/edu/unitn/bigdata/TwitterConsumer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="TwitterConsumer.iws" />
@@ -34,8 +35,8 @@
       <file leaf-file-name="TwitterConsumer.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/edu/unitn/bigdata/TwitterConsumer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.69" vertical-offset="180" max-vertical-offset="1350">
-              <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+            <state vertical-scroll-proportion="1.83" vertical-offset="0" max-vertical-offset="1320">
+              <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -182,7 +183,7 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="FullScreen" value="false" />
@@ -500,7 +501,7 @@
       <workItem from="1401825526877" duration="4000" />
       <workItem from="1401845564366" duration="74000" />
       <workItem from="1401845689227" duration="786000" />
-      <workItem from="1401868959688" duration="1687000" />
+      <workItem from="1401868959688" duration="2614000" />
     </task>
     <task id="LOCAL-00001" summary="remove var token &amp; tokenSecret">
       <created>1401813993549</created>
@@ -530,11 +531,15 @@
       <created>1401870965135</created>
       <updated>1401870965135</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="fix UNIX time and remove \n &amp; double spaces in text">
+      <created>1401871474520</created>
+      <updated>1401871474520</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6988000" />
+    <option name="totallyTimeSpent" value="7915000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -608,7 +613,8 @@
     <MESSAGE value="add manifest for packaging JAR file" />
     <MESSAGE value="add information to txt file, and option for argument" />
     <MESSAGE value="fix user's screen name" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix user's screen name" />
+    <MESSAGE value="fix UNIX time and remove \n &amp; double spaces in text" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix UNIX time and remove \n &amp; double spaces in text" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -685,8 +691,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/unitn/bigdata/TwitterConsumer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.69" vertical-offset="180" max-vertical-offset="1350">
-          <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+        <state vertical-scroll-proportion="1.83" vertical-offset="0" max-vertical-offset="1320">
+          <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -736,7 +742,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.6</last-edited>
+          <last-edited>1.7</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
