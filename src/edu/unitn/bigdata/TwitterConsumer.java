@@ -6,6 +6,10 @@ import twitter4j.auth.AccessToken;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 
 /**
  * Created by congdinh on 6/3/14.
@@ -22,11 +26,26 @@ public class TwitterConsumer {
         TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
         twitterStream.setOAuthConsumer("OOZKe0dvCzgS6Isxcpg98g", "HkLM90v39VhgptMCPMENUd2Sgq6rS2YpX45xS6Nro");
         twitterStream.setOAuthAccessToken(accessToken);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        final Runnable compute = new Runnable() {
+            @Override
+            public void run() {
+                //TODO;
+            }
+        };
+
         StatusListener simpleStatusListener = new StatusListener() {
+            long startTime = System.currentTimeMillis();
             @Override
             public void onStatus(Status status) {
                 if (status.getLang().equals("en"))
                 {
+                    long currentTime = System.currentTimeMillis();
+                    double diff = (currentTime - startTime) / (1000.0 * 60);
+                    if (diff >= 1) {
+                        new Thread(compute).start();
+                        startTime = currentTime;
+                    }
                     writeTweets(status.getId() + "\t" + status.getUser().getScreenName() + "\t" + status.getCreatedAt().getTime() + "\t" + status.getText().replace("\n", " ").replace("  ", " "));
                 }
             }
