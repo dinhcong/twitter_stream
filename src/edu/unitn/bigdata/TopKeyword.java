@@ -19,11 +19,10 @@ public class TopKeyword {
     public TopKeyword(String tweets) {
         hashMap = new HashMap<String, Integer>();
 
-        StringTokenizer st = new StringTokenizer(tweets);
+        String[] tokens = tweets.toString().toLowerCase().split("[^A-Za-z0-9_£$%<>]");
 
-        while (st.hasMoreTokens()) {
-            String key = st.nextToken();
-            if (!stopWords.contains(key)) {
+        for (String key: tokens) {
+            if (!stopWords.contains("|" + key + "|")) {
                 if (!hashMap.containsKey(key)) {
                     hashMap.put(key, Integer.valueOf(1));
                 } else {

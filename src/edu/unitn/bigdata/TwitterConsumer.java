@@ -15,7 +15,7 @@ import java.util.Calendar;
  * Created by congdinh on 6/3/14.
  */
 public class TwitterConsumer {
-    static String dataPath = "topkeyword.txt";
+    static String dataPath = "topkeyword";
 
     public static void main(String args[]) throws Exception{
 
@@ -39,7 +39,7 @@ public class TwitterConsumer {
                     double diff = (currentTime - startTime) / (1000.0 * 60);
                     if (diff >= 1) {
                         TopKeyword tw = new TopKeyword(tweets);
-                        tw.writeTopKeywords(dataPath+"-"+String.valueOf(currentTime));
+                        tw.writeTopKeywords(dataPath+"-"+String.valueOf(currentTime) + "txt");
                         tweets="";
                         startTime = currentTime;
                     }
