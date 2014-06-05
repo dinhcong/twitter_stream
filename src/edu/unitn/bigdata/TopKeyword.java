@@ -22,7 +22,7 @@ public class TopKeyword {
         String[] tokens = tweets.toString().toLowerCase().split("[^A-Za-z0-9_£$%<>]");
 
         for (String key: tokens) {
-            if (!stopWords.contains("|" + key + "|")) {
+            if (!stopWords.contains("|" + key + "|") && !key.equals("")) {
                 if (!hashMap.containsKey(key)) {
                     hashMap.put(key, Integer.valueOf(1));
                 } else {
@@ -78,8 +78,6 @@ public class TopKeyword {
             }
             FileWriter fw = new FileWriter(file.getPath(), true);
             BufferedWriter bw = new BufferedWriter(fw);
-            Iterator<String> keySetIterator = hashMap.keySet().iterator();
-            Collection<Integer> values = hashMap.values();
 
             String topKeywords[] = findTopKeywords();
             for(int i = 0; i < topKeywords.length; i++)
