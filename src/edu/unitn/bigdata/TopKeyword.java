@@ -1,6 +1,9 @@
 package edu.unitn.bigdata;
 
 import javax.swing.text.html.HTMLDocument;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.*;
 
 /**
@@ -37,5 +40,53 @@ public class TopKeyword {
 
     public static void main(String args[]) {
         TopKeyword tw = new TopKeyword("nguyen pham xuan quynh quynh quynh quynh");
+    }
+
+    public void findTopKeywords() {
+        List list = new LinkedList(hashMap.entrySet());
+
+        // sort list based on comparator
+        Collections.sort(list, new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                return ((Comparable) ((Map.Entry) (o1)).getValue())
+                    .compareTo(((Map.Entry) (o2)).getValue());
+
+            }
+        });
+
+        // put sorted list into map again
+        Map sortedMap = new LinkedHashMap();
+        for (Iterator it = list.iterator(); it.hasNext();)
+        {
+            Map.Entry entry = (Map.Entry)
+        }
+    }
+    public void writeTopKeywords(String path)
+    {
+        File file = new File(path);
+        try
+        {
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fw = new FileWriter(file.getPath(), true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            Iterator<String> keySetIterator = hashMap.keySet().iterator();
+            Collection<Integer> values = hashMap.values();
+
+            while(keySetIterator.hasNext())
+            {
+                String key = keySetIterator.next();
+                bw.write(key + "\t" + );
+            }
+            bw.write(tweet);
+            bw.newLine();
+            bw.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }
