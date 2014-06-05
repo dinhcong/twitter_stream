@@ -1,6 +1,7 @@
 package edu.unitn.bigdata;
 
-import javax.swing.text.html.HTMLDocument;
+import com.sun.xml.internal.ws.util.StringUtils;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -84,11 +85,9 @@ public class TopKeyword {
             String topKeywords[] = findTopKeywords();
             for(int i = 0; i < topKeywords.length; i++)
             {
-                System.out.println(topKeywords[i]);
-                bw.write(topKeywords[i]);
-                bw.newLine();
+                bw.write(topKeywords[i] + " ");
             }
-
+            bw.newLine();
             bw.close();
         }
         catch (Exception e)
