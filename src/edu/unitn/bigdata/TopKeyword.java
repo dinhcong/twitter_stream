@@ -1,3 +1,5 @@
+package edu.unitn.bigdata;
+
 import java.util.HashMap;
 
 /**
