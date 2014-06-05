@@ -15,7 +15,7 @@ import java.util.Calendar;
  * Created by congdinh on 6/3/14.
  */
 public class TwitterConsumer {
-    static String dataPath = "tweets.txt";
+    static String dataPath = "topkeyword.txt";
 
     public static void main(String args[]) throws Exception{
 
@@ -26,16 +26,11 @@ public class TwitterConsumer {
         TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
         twitterStream.setOAuthConsumer("OOZKe0dvCzgS6Isxcpg98g", "HkLM90v39VhgptMCPMENUd2Sgq6rS2YpX45xS6Nro");
         twitterStream.setOAuthAccessToken(accessToken);
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-        final Runnable compute = new Runnable() {
-            @Override
-            public void run() {
-                //TODO;
-            }
-        };
+        final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
         StatusListener simpleStatusListener = new StatusListener() {
             long startTime = System.currentTimeMillis();
+            String tweets="";
             @Override
             public void onStatus(Status status) {
                 if (status.getLang().equals("en"))
@@ -43,10 +38,13 @@ public class TwitterConsumer {
                     long currentTime = System.currentTimeMillis();
                     double diff = (currentTime - startTime) / (1000.0 * 60);
                     if (diff >= 1) {
-                        new Thread(compute).start();
+                        TopKeyword tw = new TopKeyword(tweets);
+                        tw.writeTopKeywords(dataPath+"-"+String.valueOf(currentTime));
+                        tweets="";
                         startTime = currentTime;
                     }
-                    writeTweets(status.getId() + "\t" + status.getUser().getScreenName() + "\t" + status.getCreatedAt().getTime() + "\t" + status.getText().replace("\n", " ").replace("  ", " "));
+                    //writeTweets(status.getId() + "\t" + status.getUser().getScreenName() + "\t" + status.getCreatedAt().getTime() + "\t" + status.getText().replace("\n", " ").replace("  ", " "));
+                    tweets += " " + status.getText().replace("\n", " ").replace("  ", " ");
                 }
             }
 
