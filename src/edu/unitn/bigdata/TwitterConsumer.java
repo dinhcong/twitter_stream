@@ -1,7 +1,9 @@
 package edu.unitn.bigdata;
 
+import sun.org.mozilla.javascript.internal.json.JsonParser;
 import twitter4j.*;
 import twitter4j.auth.AccessToken;
+import twitter4j.conf.ConfigurationBuilder;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -22,19 +24,22 @@ public class TwitterConsumer {
 
         if (args.length > 0) dataDir = args[0];
 
-        AccessToken accessToken = new AccessToken("867221126-vsmwC9Gf5DNTh7zQkxxnWojhzAdrEQ0kqKSEZhI7", "FCEgFIWVIwdpKYqkQ7YRxHa1sxlT0MFDJN6hfCWQc");
-
-        TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
-        twitterStream.setOAuthConsumer("OOZKe0dvCzgS6Isxcpg98g", "HkLM90v39VhgptMCPMENUd2Sgq6rS2YpX45xS6Nro");
+        AccessToken accessToken = new AccessToken("1065129572-a2xiO3kOCJkXOmX7ttUR3Nq34Aivmunlk4UKq5t", "0JEeHnQUzshIEwkqa0w58VcKOkHeoAUI9gVMZhmpObmss");
+        ConfigurationBuilder cb = new ConfigurationBuilder();
+        cb.setJSONStoreEnabled(true);
+        TwitterStream twitterStream = new TwitterStreamFactory(cb.build()).getInstance();
+        twitterStream.setOAuthConsumer("3dvYuPSa5esLHFuSUzJ4tgFMk", "Km0D2t0qkQWq5IjP3po9QiXjcyEjnSIt8WXck2zGW2MvTHruKO");
         twitterStream.setOAuthAccessToken(accessToken);
 
 
         StatusListener simpleStatusListener = new StatusListener() {
             @Override
             public void onStatus(Status status) {
-                if (status.getLang().equals("en"))
-                {
-                    writeTweets(status.getId() + "\t"
+               // if (status.getLang().equals("en"))
+              //  {
+                    String rawJSON = TwitterObjectFactory.getRawJSON(status);
+                    writeTweets(cleanText(rawJSON));
+                    /*writeTweets(status.getId() + "\t"
                             // User profile
                             + status.getUser().getScreenName() + "\t"
                             + cleanText(status.getUser().getLocation()) + "\t"
@@ -54,8 +59,8 @@ public class TwitterConsumer {
                             + status.getPlace().getCountry() + "\t"
                             + status.getPlace().getStreetAddress() + "\t"
                             + status.getLang() + "\t" // Lang of the tweet
-                            + cleanText(status.getText()));
-                }
+                            + cleanText(status.getText()));*/
+              //  }
             }
 
             @Override
@@ -87,8 +92,8 @@ public class TwitterConsumer {
 
         twitterStream.addListener(simpleStatusListener);
         FilterQuery filterQuery = new FilterQuery();
-        double[][] locations = { {9.011490619692509,45.356685994655464},
-                {9.312688264185276,45.56778671132765} };
+        double[][] locations = { {10.439443587087794,45.679983268451274},
+                {11.987546900385569, 46.532036602887004} };
         filterQuery.locations(locations);
         twitterStream.filter(filterQuery);
     }
@@ -97,11 +102,10 @@ public class TwitterConsumer {
         if(++countTweets%1000000==0) {
             Date date = new Date();
             dataPath = dataDir + "tweets_" + dateFormat.format(date) + ".txt";
-            System.out.println("Start a new file");
+            System.out.println("Start a new file " + dataPath);
             countTweets = 0;
         }
         File file = new File(dataPath);
-        System.out.println("write file to " + dataPath);
         try
         {
             if (!file.exists()) {
@@ -119,6 +123,10 @@ public class TwitterConsumer {
         }
     }
     public static String cleanText (String orgText) {
-        return orgText.replace("\n"," ").replace("\t"," ").replace("  "," ").trim();
+        String temp = orgText.replace("\n"," ").replace("\t"," ");
+        while(temp.contains("  ")){
+            temp = temp.replace("  "," ");
+        }
+        return temp.trim();
     }
 }
