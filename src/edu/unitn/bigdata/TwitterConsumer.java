@@ -8,43 +8,53 @@ import java.io.File;
 import java.io.FileWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
+import java.util.Date;
 
 /**
  * Created by congdinh on 6/3/14.
  */
 public class TwitterConsumer {
-    static String dataPath = "topkeyword";
-
+    static String dataDir = "./";
+    static String dataPath = "";
+    static DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+    static int countTweets = -1;
     public static void main(String args[]) throws Exception{
 
-        if (args.length > 0) dataPath = args[0];
+        if (args.length > 0) dataDir = args[0];
 
         AccessToken accessToken = new AccessToken("867221126-vsmwC9Gf5DNTh7zQkxxnWojhzAdrEQ0kqKSEZhI7", "FCEgFIWVIwdpKYqkQ7YRxHa1sxlT0MFDJN6hfCWQc");
 
         TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
         twitterStream.setOAuthConsumer("OOZKe0dvCzgS6Isxcpg98g", "HkLM90v39VhgptMCPMENUd2Sgq6rS2YpX45xS6Nro");
         twitterStream.setOAuthAccessToken(accessToken);
-        final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+
 
         StatusListener simpleStatusListener = new StatusListener() {
-            long startTime = System.currentTimeMillis();
-            String tweets="";
             @Override
             public void onStatus(Status status) {
                 if (status.getLang().equals("en"))
                 {
-                    long currentTime = System.currentTimeMillis();
-                    double diff = (currentTime - startTime) / (1000.0 * 60);
-                    if (diff >= 1) {
-                        TopKeyword tw = new TopKeyword(tweets);
-                        tw.writeTopKeywords(dataPath+"-"+String.valueOf(currentTime) + "txt");
-                        tweets="";
-                        startTime = currentTime;
-                    }
-                    //writeTweets(status.getId() + "\t" + status.getUser().getScreenName() + "\t" + status.getCreatedAt().getTime() + "\t" + status.getText().replace("\n", " ").replace("  ", " "));
-                    tweets += " " + status.getText().replace("\n", " ").replace("  ", " ");
+                    writeTweets(status.getId() + "\t"
+                            // User profile
+                            + status.getUser().getScreenName() + "\t"
+                            + cleanText(status.getUser().getLocation()) + "\t"
+                            + cleanText(status.getUser().getDescription()) + "\t"
+                            + status.getUser().getLang() + "\t" // Lang user prefers
+                            + status.getUser().getTimeZone() + "\t"
+                            + status.getUser().getFollowersCount() + "\t"
+                            + status.getUser().getFriendsCount() + "\t"
+                            + status.getUser().getStatusesCount() + "\t"
+                            // Posted time
+                            + status.getCreatedAt().getTime() + "\t"
+                            // Geo location
+                            + status.getGeoLocation().getLatitude() + "\t"
+                            + status.getGeoLocation().getLongitude() + "\t"
+                            // Place detail
+                            + status.getPlace().getName() + "\t"
+                            + status.getPlace().getCountry() + "\t"
+                            + status.getPlace().getStreetAddress() + "\t"
+                            + status.getLang() + "\t" // Lang of the tweet
+                            + cleanText(status.getText()));
                 }
             }
 
@@ -76,11 +86,22 @@ public class TwitterConsumer {
         };
 
         twitterStream.addListener(simpleStatusListener);
-        twitterStream.sample();
+        FilterQuery filterQuery = new FilterQuery();
+        double[][] locations = { {9.011490619692509,45.356685994655464},
+                {9.312688264185276,45.56778671132765} };
+        filterQuery.locations(locations);
+        twitterStream.filter(filterQuery);
     }
 
     public static void writeTweets(String tweet) {
+        if(++countTweets%1000000==0) {
+            Date date = new Date();
+            dataPath = dataDir + "tweets_" + dateFormat.format(date) + ".txt";
+            System.out.println("Start a new file");
+            countTweets = 0;
+        }
         File file = new File(dataPath);
+        System.out.println("write file to " + dataPath);
         try
         {
             if (!file.exists()) {
@@ -96,5 +117,8 @@ public class TwitterConsumer {
         {
             e.printStackTrace();
         }
+    }
+    public static String cleanText (String orgText) {
+        return orgText.replace("\n"," ").replace("\t"," ").replace("  "," ").trim();
     }
 }
