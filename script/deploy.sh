@@ -1,1 +1,1 @@
-scp -i ../config/congmac.pem ~/Downloads/TwitterConsumer.jar ec2-user@ec2-54-209-252-24.compute-1.amazonaws.com:~/.
+scp -i ../config/congmac.pem ~/Downloads/TwitterConsumer.jar ec2-user@ec2-54-76-152-203.eu-west-1.compute.amazonaws.com:~/.

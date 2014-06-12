@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: edu.unitn.bigdata.TwitterConsumer
+Main-Class: edu.unitn.bigdata.TwitterPusher
 
